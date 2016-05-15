@@ -1,0 +1,256 @@
+dim(pm1)
+x1 <- pm1$Sample.Value
+mean(is.na(x1))
+summary(x0)
+summary(x1)
+boxplot(x0,x1)
+boxplot(log10(x0),log10(x1))
+negative <- x1<0
+sum(negative,na.rm=TRUE)
+mean(negative,na.rm=TRUE)
+dates <- pm1$Date
+str(dates)
+dates <- as.Date(as.character(dates),"%Y%m%d")
+head(dates)
+hist(dates[negative],"month")
+str(site0)
+both <- intersect(site0,site1)
+both
+head(pm0)
+cnt0 <- subset(pm0,State.Code==36 & county.site %in% both)
+cnt1 <- subset(pm1,State.Code==36 & county.site %in% both)
+sapply(split(cnt0, cnt0$county.site), nrow)
+sapply(split(cnt1, cnt1$county.site), nrow)
+pm0sub <- subset(cnt0,County.Code = 63 & Site.ID = 2008)
+pm0sub <- subset(cnt0,County.Code == 63 & Site.ID == 2008)
+pm1sub <- subset(cnt1,County.Code == 63 & Site.ID == 2008)
+x0sub <- pm0sub$Sample.Value
+x1sub <- pm1sub$Sample.Value
+date0 <- as.Date(as.character(pm0sub$Date), "%Y%m%d")
+dates0 <- as.Date(as.character(pm0sub$Date), "%Y%m%d")
+dates1 <- as.Date(as.character(pm1sub$Date), "%Y%m%d")
+par(mfrow=c(1,2),mar=c(4,4,2,1))
+plot(dates0,x0sub,pch=20)
+abline(x0sub, lwd=2, na.rm=TRUE)
+abline(with x0sub, lwd=2, na.rm=TRUE)
+abline(median(x0sub,na.rm=TRUE), lwd=2)
+abline(median(x0sub$Sample.Value,na.rm=TRUE), lwd=2)
+abline(x0sub$Sample.Value, lwd=2)
+abline(x0sub, lwd=2)
+abline(h=median(x0sub$Sample.Value,na.rm=TRUE), lwd=2)
+abline(h=median(x0sub,na.rm=TRUE), lwd=2)
+plot(dates1,x1sub,pch=20)
+abline(h=median(x1sub,na.rm=TRUE), lwd=2)
+rng <- range(x0sub,x1sub,na.rm=TRUE)
+rng
+mn0 <- with(pm0,tapply(Sample.Value,State.Code,mean,na.rm=TRUE))
+str(mn0)
+mn1 <- with(pm1,tapply(Sample.Value,State.Code,mean,na.rm=TRUE))
+str(mn1)
+summary(mn0)
+summary(mn1)
+d0 <- data.frame(state=names(mn0),mean=mn0)
+d1 <- data.frame(state=names(mn1),mean=mn1)
+mrg <- merge(d0,d1,by="state")
+dim(mrg)
+head(mrg)
+with(mrg,plot(rep(1,52),mrg[,2],xlim = c(.5,2.5)))
+points(rep(2,52),mrg[,3])
+with(mrg, points(rep(2, 52), mrg[, 3]))
+with(mrg, segments(rep(1,52),mrg[,2],rep(2, 52), mrg[, 3])
+)
+segments(rep(1, 52), mrg[, 2], rep(2, 52), mrg[, 3])
+mrg[mrg$mean.x < mrg$mean.y, ]
+setwd("ed/coursera/ASMNTS/Reproducable")
+read.csv(file="activity.csv", header=TRUE, sep=",")
+read.csv(file="activity.csv", header=TRUE, sep=",")
+setwd("ed/coursera/ASMNTS/Reproducable/RepData_PeerAssessment1")
+setwd("RepData_PeerAssessment1")
+read.csv(file="activity.csv", header=TRUE, sep=",")
+act <- read.csv(file="activity.csv", header=TRUE, sep=",")
+setwd("ed/coursera/ASMNTS/Reproducable/RepData_PeerAssessment1",na.strings="NA")
+setwd("ed/coursera/ASMNTS/Reproducable/RepData_PeerAssessment1",na.strings="NA")
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+str(sct)
+str(act)
+act <- select(act,act.interval==5)
+act <- select(act,act.interval==5)
+library(dplyr)
+act <- select(act,act.interval==5)
+act <- select(act,act$interval==5)
+act <- select(act,act$interval=="5")
+act <- select(act,interval==5)
+act <- select(data,as.character(interval)=="5")
+act <- select(act,as.character(act$interval)=="5")
+act <- act[act$interval=="5"]
+act <- act[,act$interval=="5"]
+act <- act[act$interval=="5",]
+head(act)
+str(act)
+act$date <- as.Date(act$date, format = "%Y/%m/%d")
+head(sct)
+head(act)
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act$date <- as.Date(act$date, format = "%d/%y/%Y")
+head(act)
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+head(act)
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+head(act)
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act <- act[act$interval=="5",]
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+head(act)
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act <- act[!isna(act$steps),]
+act <- act[!is.na(act$steps),]
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+head(act)
+act  <- group_by(act$date)
+act  <- group_by(act,act$date)
+act  <- group_by(act,act$interval)
+act  <- group_by(act,date)
+act  <- summarize(act,steps)
+act  <- summarize(steps = sum(steps))
+act  <- summarize(act,steps = sum(steps))
+head(sct)
+head(act)
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act  <- summarize(act,steps = sum(steps))
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+act  <- summary(act,steps = sum(steps))
+hist(act$steps)
+hist(act,steps)
+hist(steps)
+hist(sct$steps)
+hist(act$steps)
+hist(act$steps, main = "Steps per day", xlab = "days",col = "red")
+hist(act$date, main = "Steps per day", xlab = "days",col = "red")
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+hist(act$steps, main = "Steps per day", xlab = "days",col = "red")
+str(act)
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+act  <- group_by(act,date)
+act  <- summarize(act,steps = sum(steps))
+hist(act$steps, main = "Steps per day", xlab = "days",col = "red")
+plot(act$steps ~ act$date , type = "l",ylab = "steps",xlab="Date")
+str(act)
+hist(act$steps, main = "Steps per day", xlab = "days",col = "red")
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+actNoNa <- act[!is.na(act$steps),]
+actNoNag  <- group_by(actNoNa,date)
+actMM <- summarize(actNoNag,meanx = mean(steps),median=median(steps))
+head(actMM)
+actMM <- summarize(actNoNag,meanAct = mean(steps),medianAct=median(steps,na.rm=T))
+actMM
+actMM <- summarize(actNoNag,meanAct = median(steps))
+actMM
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+actNoNa <- act[!is.na(act$steps),]
+actNoNag  <- group_by(actNoNa,date)
+actsum  <- summarize(actNoNag,stepsAct = sum(steps))
+hist(actsum)
+hist(actsum$teps)
+hist(actsum$steps)
+head(actsum)
+actNoNag
+actsum  <- summarize(actNoNag,stepsAct = sum(steps))
+sctsum
+actsum
+actmean  <- summarize(actNoNag,steps = mean(steps))
+actmean
+qplot(date, steps, data = actmean, #
+      xlab = "date", ylab = "Average steps", geom = c("point", "path"),#
+      main = "Average Daily Steps")
+library(ggplot2)
+qplot(date, steps, data = actmean, type="l"#
+      xlab = "date", ylab = "Average steps", geom = c("point", "path"),#
+      main = "Average Daily Steps")
+qplot(date, steps, data = actmean, type="l"#
+      xlab = "date", ylab = "Average steps", geom = c("point", "path"),#
+      main = "Average Daily Steps")
+qplot(date, steps, data = actmean, type="l" xlab = "date", ylab = "Average steps", geom = c("point", "path"),main = "Average Daily Steps")
+qplot(date, steps, data = actmean, type="l", xlab = "date", ylab = "Average steps", geom = c("point", "path"),main = "Average Daily Steps")
+plot(date, steps, data = actmean, type="l", xlab = "date", ylab = "Average steps", geom = c("point", "path"),main = "Average Daily Steps")
+actmean  <- summarize(actNoNag,interval = mean(interval),steps = mean(steps))
+plot(x=actmean$interval, y=actmean$steps,type="l", xlab="x",ylab="y")
+actmean
+actNoNag
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+actNoNa <- act[!is.na(act$steps),]
+actNoNag  <- group_by(actNoNa,date)
+actNoNag
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+act$date <- as.Date(act$date, format = "%Y-%m-%d")
+actNoNa <- act[!is.na(act$steps),]
+actNoNag  <- group_by(actNoNa,date)
+actNoNag
+actmean  <- summarize(actNoNag,steps = mean(steps))
+actmean
+actmean  <- summarize(actNoNag,steps = steps/sum(steps))
+actmean  <- summarize(actNoNag,stepss = steps/sum(steps))
+actmean  <- summarize(actNoNag,stepss = steps/sum(steps),interval)
+actmean  <- summarize(actNoNag,steps = mean(steps),interval=interval)
+actmean  <- summarize(actNoNag,steps = mean(steps))
+actmean  <- summarize(actNoNag,steps = mean(steps),interval)
+actmean  <- summarize(actNoNag,steps = mean(steps),interval)
+actNoNaint  <- group_by(actNoNa,interval)
+actmean  <- summarize(actNoNaint,steps = mean(steps))
+actmean
+plot(x=actmean$interval, y=actmean$steps,type="l", xlab="x",ylab="y")
+max(actmean(steps))
+max(actmean$steps)
+interval <- steps==max(actmean$steps)
+interval <- actmean$steps==max(actmean$steps)
+interval
+interval[ actmean$steps==max(actmean$steps)]
+interval1 <-interval[ actmean$steps==max(actmean$steps)]
+interval1
+summary(actmean)
+actmax <- select(actmean,actmean$steps==max(actmean$steps))
+maxs <- max(actmean$steps)
+actmax <- select(actmean,actmean$steps==maxs)
+interval==TRUE
+is.na(act$steps)
+count(is.na(act$steps))
+act[is.na(act$steps)]
+act[is.na(act$steps),]
+act[!is.na(act$steps),]
+count(is.na(act$steps))
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+count(is.na(act$steps))
+sum(is.na(act$steps))
+act$steps[is.na(act$steps)]
+act$steps[is.na(act$steps)] <- 1
+act$steps[is.na(act$steps)]
+act$steps[act$steps==1] <- mean(act$steps)
+act$steps
+act <- read.csv(file="activity.csv", header=TRUE, sep=",",na.strings="NA")
+summary(act$steps)
+stepsFilled <- act$steps
+summary(stepsFilled)
+sum(is.na(act$steps))
+head(stepsFilled)
+head(stepsFilled,100)
+head(stepsFilled,500)
+stepsFilled[is.na(stepFilled)] <- mean(stepFilled)
+stepsFilled[is.na(stepFilled)] <- mean(stepsFilled)
+stepsFilled[is.na(stepsFilled)] <- mean(stepsFilled)
+head(stepsFilled,500)
+stepsFilled[is.na(stepsFilled)]
+stepsFilled[is.na(stepsFilled)] <- mean(stepsFilled)
+stepsFilled[is.na(stepsFilled)]
+mean(stepsFilled)
+mean(stepsFilled,na.rm = T)
+stepsFilled[is.na(stepsFilled)] <- mean(stepsFilled,na.rm = T)
+stepsFilled[is.na(stepsFilled)]
+head(stepsFilled,500)
+Filled <- act
+Filled$steps[is.na(Filled$steps)] <- mean(Filled$steps,na.rm = T)
+illed$steps[is.na(illed$steps)]
+Filled$steps[is.na(Filled$steps)]
